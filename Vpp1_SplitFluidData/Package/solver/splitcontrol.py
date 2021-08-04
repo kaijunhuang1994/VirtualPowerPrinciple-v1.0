@@ -1,6 +1,6 @@
 from ..parser.inputdatabase import InputDatabase
 
-class SolverControl:
+class SplitControl:
 
     def __init__(self, path: str):
         

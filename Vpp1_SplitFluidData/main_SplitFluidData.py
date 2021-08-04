@@ -3,32 +3,31 @@ from tecplot.exception import *
 from tecplot.constant import *
 
 import Package
-from Package.solver.solvercontrol import SolverControl
+from Package.solver.splitcontrol import SplitControl
 
 import numpy as np
 import pandas as pd
 import os
 
-from shutil import copy
-
 
 tecplot.session.connect(port=7600)
 
 # Read split control file
-solver_control = SolverControl("input/splitControlDict")
+solver_control = SplitControl("input/splitControlDict")
 
-# Create a folder named "_DataDir", which is used to store temporary data (The whole virtual power analysis data)
+
+# Create folders
+# "_DataDir": store the whole virtual power analysis data
+# "_DataDir/Worksheet": store split data
 write_dir = solver_control.get_write_path() + "_DataDir/"
 if not os.path.exists(write_dir):
     os.makedirs(write_dir)
 
-# Create a folder named "Worksheet", which is used to store split data
 worksheet_dir = write_dir + "Worksheet/"
 if not os.path.exists(worksheet_dir):
     os.makedirs(worksheet_dir)
 
-# Copy splitControlDict to Worksheet
-copy("input/splitControlDict", worksheet_dir)
+
 
 # Read openfoam case (controlDcit file)
 dataset = tecplot.data.load_openfoam(
@@ -64,13 +63,13 @@ for step,time in enumerate(dataset.solution_times):
     if not os.path.exists(path):
         os.makedirs(path)
     
+    # write name : e.g. fluid_0.plt
     write_name = path + "fluid_" + str(step) + ".plt"
     tecplot.data.save_tecplot_plt(
         write_name, 
         dataset=dataset,              
         zones=zone_to_save)
     
-
 
 # Write the boundary data and the grid data of each time step
 for step,time in enumerate(dataset.solution_times):
@@ -79,7 +78,7 @@ for step,time in enumerate(dataset.solution_times):
     if step == 0:
         continue
     
-    print("write fluid data, time = ",time)
+    print("write fluid data, time = ", time)
 
     fluid_x = dataset.zone(step * num_zones).values("X C").as_numpy_array()
     fluid_y = dataset.zone(step * num_zones).values("Y C").as_numpy_array()
