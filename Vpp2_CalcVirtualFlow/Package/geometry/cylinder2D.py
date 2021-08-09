@@ -138,7 +138,10 @@ class VirtualMovingCylinder2D(MovingCylinder2D):
 
         elif (self.__virtualmotion == "sourcePoint"):
 
-            collocation_out = np.array(self.get_input_db()["model"]["sourcePoint"])
+            collocation_out_x = self.get_input_db()["model"]["sourcePoint"][0]
+            collocation_out_y = self.get_input_db()["model"]["sourcePoint"][1]
+
+            collocation_out = np.array([collocation_out_x, collocation_out_y])
             collocation_center = self.get_current_center()
 
             a = np.sqrt((collocation_out[0] - collocation_center[0])**2 + (collocation_out[1] - collocation_center[1])**2)
@@ -175,7 +178,10 @@ class VirtualMovingCylinder2D(MovingCylinder2D):
 
         elif (self.__virtualmotion == "sourcePoint"):
 
-            collocation_out = np.array(self.get_input_db()["model"]["sourcePoint"])
+            collocation_out_x = self.get_input_db()["model"]["sourcePoint"][0]
+            collocation_out_y = self.get_input_db()["model"]["sourcePoint"][1]
+
+            collocation_out = np.array([collocation_out_x, collocation_out_y])
             collocation_center = self.get_current_center()
 
             a = np.sqrt((collocation_out[0] - collocation_center[0])**2 + (collocation_out[1] - collocation_center[1])**2)

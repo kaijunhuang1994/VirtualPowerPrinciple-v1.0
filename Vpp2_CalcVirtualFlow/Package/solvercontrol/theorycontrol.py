@@ -5,7 +5,6 @@ class TheoryControl:
     def __init__(self, path: str):
         
         input_db = InputDatabase.from_file(path)
-
         # print(input_db)
 
         # geometric model
@@ -19,6 +18,9 @@ class TheoryControl:
         # the virtual flow
         assert isinstance(input_db["model"]["virtualmotion"], str)
         self.__virtualflow = input_db["model"]["virtualmotion"]
+
+        if (self.__virtualflow == "sourcePoint"):
+            self.__source_point = input_db["model"]["sourcePoint"]
         
 
     def get_geometry(self):
@@ -30,6 +32,11 @@ class TheoryControl:
         return self.__motion
 
     def get_virtualmotion(self):
+        
         return self.__virtualflow
+
+    def get_source_point(self):
+
+        return self.__source_point
 
 
