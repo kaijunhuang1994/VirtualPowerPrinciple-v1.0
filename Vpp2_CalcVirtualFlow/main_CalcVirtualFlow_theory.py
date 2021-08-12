@@ -92,10 +92,10 @@ if __name__ == "__main__":
             from Package.geometry.cylinder2D import VirtualMovingCylinder2D
             virtualflow = VirtualMovingCylinder2D(time)
 
-        # elif(theory_control.get_geometry() == "sphere3D"):
+        elif(theory_control.get_geometry() == "sphere3D"):
 
-        #     from Package.geometry.sphere3D import *
-        #     virtualflow = VirtualMovingSphere3D()
+            from Package.geometry.sphere3D import *
+            virtualflow = VirtualMovingSphere3D()
 
         else:
             quit()
