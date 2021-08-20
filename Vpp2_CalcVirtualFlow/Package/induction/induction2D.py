@@ -132,10 +132,17 @@ def velocity_point_sigma(collocation,sigma,point):
     
     r = np.sqrt(((point[0] - collocation[0]))**2+((point[1] - collocation[1]))**2)
 
+    r[np.where(r<0.0001)] = 1
+
     d = 0.001
 
     velocity_u = sigma/(2*PI*r)*(point[0] - collocation[0])/r*(1-np.exp(-1.0*(r/d)**3))
     velocity_v = sigma/(2*PI*r)*(point[1] - collocation[1])/r*(1-np.exp(-1.0*(r/d)**3))
+
+    velocity_u[np.where(r<0.0001)] = 0
+    velocity_v[np.where(r<0.0001)] = 0
+
+
     
     velocity = np.array([velocity_u, velocity_v]) 
 
