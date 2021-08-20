@@ -13,3 +13,6 @@ The first step of the virtual power analysis - split fluid data.
 
 The second step of the virtual power analysis - calculate the virtual flow
 
+## Vpp3_FlowVisualization
+
+The third step of the virtual power analysis - visualization of virtual flow fields
